@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>数字人行为实验</title>
+      <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 4px auto;
+        width: 100%;
+    }
+    p {
+        font-size: 22px;
+        margin: 10px;
+        line-height: 1.6;
+    }
+
+    h2 {
+        font-size: 28px;
+        margin: 10px;
+        line-height: 1.6;
+    }
+    h4 {
+        font-size: 20px;
+        margin: 10px;
+        line-height: 1.6;
+    }
+
+    a.button {
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 6px;
+      color: white;
+      font-weight: bold;
+      background-color: black;
+      border: 1px solid #ccc;
+      border-radius: 40px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none; /* Remove underline */
+    }
+
+    a.button:hover {
+      background-color: darkgrey;
+    }
+
+    @media only screen and (max-width: 600px) {
+        h3 {
+            font-size: 13px;
+            height: auto;
+            padding: 10px;
+        }
+        p {
+            font-size: 18px;
+        }
+    }
+    .answer-input {
+      width: 60%;
+      margin-left: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+  </head>
+  <body>
+   <h4>请使用如下导览界面，然后回答如下问题。</h4>
+
+        <!-- 替换视频为附件2中的iframe -->
+    <iframe class="h100p w100p" srcdoc="
+    <!DOCTYPE html>
+    <html lang=&quot;en&quot;>
+    <head>
+      <title>模型动画</title>
+      <meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; />
+      <meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot; />
+      <script src=&quot;https://www.wxb3d.com/saas/sdk/v1.1/VgoMap.umd.js&quot;></script> 
+      <link rel=&quot;stylesheet&quot; href=&quot;https://www.wxb3d.com/saas/sdk/v1.1/VgoMap.umd.css&quot;&gt; 
+    </head>
+    <style>
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 15px;
+  }
+
+  p {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .card {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.07);
+    z-index: 1;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    background-color: #fff;
+  }
+
+  .typeBtn {
+    padding: 0px 10px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9ecef;
+    color: #74b9ff;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+
+  .input-card {
+    background-color: #fff;
+    padding: 5px 10px;
+  }
+</style>
+
+    <body>
+      <div id=&quot;mapContainer&quot; style=&quot;width: 100%; height: 100%;&quot;></div>
+    </body>
+    <script>
+  let mapId = '1587980663909388289'; // 您创建的地图ID
+  let marker = null;
+
+  // 初始化地图
+  let map = new VgoMap.Map({
+    el: 'mapContainer',
+    id: mapId,
+  });
+
+  // 监听地图加载完成
+  map.on('loaded', () => {
+    console.log('加载完成');
+    // 监听模型全部加载完成
+    map.on('floorModelAllLoaded', (data) => {
+      // 判断当前要展示的楼层是否一致
+      if (data.id === map.mapData.id) {
+        // 获取到对应的模型，这里获取的是卡车模型
+        let model = map.getModelById(&quot;ljnvcnlmssk&quot;);
+        if (!model) {
+          return;
+        }
+
+        //生成路径点
+        // 第一个点则是模型的初始位置
+        let path = [model.data.position, { x: 89.2682929049267, y: -0.2807872540732079, z: -1.0000000000000473 }, { x: 38.28258980149938, y: -46.76806675234569, z: -1 }, { x: 24.05138334486039, y: -72.25456530871818, z: -0.9999999999999528 }, { x: 24.072268704544, y: -111.20734156115543, z: -1 }, { x: 29.132774524737087, y: -142.61390263558755, z: -1 }, { x: 17.974061065969867, y: -204.2602197360307, z: -0.9999999999999528 }, { x: -2.648835166204586, y: -269.4427086850751, z: -1 }];
+
+        // 获取模型位置
+        let objPos = model.object3d.children[0].position;
+
+        // 创建动画函数
+        let go = (idx, dir) => {
+          let pos = path[idx + dir];
+          if (!pos) {
+            dir = -dir;
+            return setTimeout(() => {
+              go(idx + dir, dir);
+            }, 2000);
+          }
+
+          let time = objPos.distanceTo(pos) / 40;
+          let pos1 = { ...pos, z: model.data.position.z };
+
+          let rot = objPos.clone().sub(pos1).angleTo(new VgoMap.THREE.Vector3(1, 0, 0));
+          let rotDir = objPos.clone().cross(pos1);
+          rot = rotDir.z > 0 ? -rot : rot;
+
+          new VgoMap.TWEEN.Tween(objPos).to(pos1, time * 1000).onUpdate(() => {
+            model.object3d.children[0].rotation.z = rot;
+          }).onComplete(() => {
+            go(idx + dir, dir);
+          }).start();
+        };
+
+        // 开启动画函数
+        go(0, 1);
+      }
+    });
+  });
+</script>
+
+    </html>" style="position: absolute; top: 50%; left: 0; right: 0; bottom: 0; margin: auto; width: 100%; height: 50%; border: none;"></iframe>
+
+
+
+    <h1>这个导览界面使用流畅，不卡顿。</h1>  
+    
+    <div class="radio-group">  
+        <label><input type="radio" name="opinion" value="A"> A: 完全同意</label>  
+        <label><input type="radio" name="opinion" value="B"> B: 较同意</label>  
+        <label><input type="radio" name="opinion" value="C"> C: 一般</label>  
+        <label><input type="radio" name="opinion" value="D"> D: 较不同意</label>  
+        <label><input type="radio" name="opinion" value="E"> E: 完全不同意</label>  
+    </div>  
+
+</body> 
+
+<a class="button" onclick="submitData()">提交并继续</a> <!-- 提交按钮 -->
+
+<script>
+function submitData() {
+  // 获取用户输入的答案
+  var answer = document.getElementById("answer").value;
+  
+  // 检查用户是否填写了答案
+  if (!answer) {
+    alert("请填写答案后再提交！");
+    return; // 如果未填写答案，则不执行后续操作
+  }
+  
+  // 创建一个新的XHR对象
+  var xhr = new XMLHttpRequest();
+  
+  // 配置XHR请求
+  xhr.open("POST", "http://customer_lct.nkubjw.cn/process_data.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  
+  // 处理XHR响应
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      if (xhr.status == 200) {
+        // 用户提交了数据后，可以继续执行其他操作或跳转到下一个页面
+        window.location.href = "http://customer_lct.nkubjw.cn/index_3.html";
+      } else {
+        // 处理错误情况
+        alert("发生错误，请稍后再试。");
+      }
+    }
+  };
+  
+  // 发送XHR请求
+  xhr.send("answer=" + encodeURIComponent(answer));
+}
+</script>
+
+</body>
+</html>

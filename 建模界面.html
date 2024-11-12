@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>数字人行为实验</title>
+      <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 4px auto;
+        width: 100%;
+    }
+    p {
+        font-size: 22px;
+        margin: 10px;
+        line-height: 1.6;
+    }
+
+    h2 {
+        font-size: 28px;
+        margin: 10px;
+        line-height: 1.6;
+    }
+    h4 {
+        font-size: 20px;
+        margin: 10px;
+        line-height: 1.6;
+    }
+
+    a.button {
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 6px;
+      color: white;
+      font-weight: bold;
+      background-color: black;
+      border: 1px solid #ccc;
+      border-radius: 40px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none; /* Remove underline */
+    }
+
+    a.button:hover {
+      background-color: darkgrey;
+    }
+
+    @media only screen and (max-width: 600px) {
+        h3 {
+            font-size: 13px;
+            height: auto;
+            padding: 10px;
+        }
+        p {
+            font-size: 18px;
+        }
+    }
+    .answer-input {
+      width: 60%;
+      margin-left: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+  </head>
+  <body>
+   <h4>请使用如下导览界面，然后回答如下问题。</h4>
+
+        <iframe 
+      srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;title&gt;POI点击&lt;/title&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot; /&gt;
+  &lt;script src=&quot;https://www.wxb3d.com/saas/sdk/v1.1/VgoMap.umd.js&quot;&gt;&lt;/script&gt; 
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://www.wxb3d.com/saas/sdk/v1.1/VgoMap.umd.css&quot;&gt; 
+&lt;/head&gt;
+&lt;style&gt;
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+  }
+
+  .card {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.07);
+    z-index: 1;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    background-color: #fff;
+  }
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;div id=&quot;mapContainer&quot; style=&quot;width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;card&quot;&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  let mapId = '1633665850273828864' // 您创建的地图ID
+  let marker = null
+  let card = document.querySelector('.card')
+
+  // 初始化地图
+  let map = new VgoMap.Map({
+    el: 'mapContainer',
+    id: mapId,
+  })
+
+  // 监听地图加载完成
+  map.on('loaded', () =&gt; {
+    console.log('地图加载成功')
+
+    // 监听地图点击事件
+    map.on('click', (e) =&gt; {
+      marker &amp;&amp; map.removeAllCustomMarker()
+      // 获取poi点数据
+      const polygon = e.object?.userData?.polygonData
+
+      console.log(polygon, 'polygon')
+      if (polygon) {
+        card.style.display = 'block'
+        card.innerHTML = `名称: ${polygon.name || '未命名'}，id: ${polygon.id}`
+        // 通过poi点数据创建覆盖物
+        marker = map.addMarker(polygon.parent.id, {
+          isCollision: false,
+          position: polygon.center,
+          scale: 0.15,
+          src: 'https://vgo-1258766855.cos.ap-nanjing.myqcloud.com/saas/general/8011b647-303c-4858-b12d-91b8c9268635.png', 
+        })
+      } else {
+        card.style.display = 'none'
+      }
+    })
+  })
+&lt;/script&gt;
+&lt;/html&gt;" 
+      style="position: absolute; top: 50%; left: 0; right: 0; bottom: 0; margin: auto; width: 100%; height: 50%; border: none;" 
+    ></iframe>
+
+
+    <h1>这个导览界面使用流畅，不卡顿。</h1>  
+    
+    <div class="radio-group">  
+        <label><input type="radio" name="opinion" value="A"> A: 完全同意</label>  
+        <label><input type="radio" name="opinion" value="B"> B: 较同意</label>  
+        <label><input type="radio" name="opinion" value="C"> C: 一般</label>  
+        <label><input type="radio" name="opinion" value="D"> D: 较不同意</label>  
+        <label><input type="radio" name="opinion" value="E"> E: 完全不同意</label>  
+    </div>  
+
+</body> 
+
+<a class="button" onclick="submitData()">提交并继续</a> <!-- 提交按钮 -->
+
+<script>
+function submitData() {
+  // 获取用户输入的答案
+  var answer = document.getElementById("answer").value;
+  
+  // 检查用户是否填写了答案
+  if (!answer) {
+    alert("请填写答案后再提交！");
+    return; // 如果未填写答案，则不执行后续操作
+  }
+  
+  // 创建一个新的XHR对象
+  var xhr = new XMLHttpRequest();
+  
+  // 配置XHR请求
+  xhr.open("POST", "http://customer_lct.nkubjw.cn/process_data.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  
+  // 处理XHR响应
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      if (xhr.status == 200) {
+        // 用户提交了数据后，可以继续执行其他操作或跳转到下一个页面
+        window.location.href = "http://customer_lct.nkubjw.cn/index_3.html";
+      } else {
+        // 处理错误情况
+        alert("发生错误，请稍后再试。");
+      }
+    }
+  };
+  
+  // 发送XHR请求
+  xhr.send("answer=" + encodeURIComponent(answer));
+}
+</script>
+
+</body>
+</html>
