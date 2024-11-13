@@ -1,131 +1,114 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>问卷调查</title>
-      <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 4px auto;
-        width: 100%;
-    }
-    p {
-        font-size: 22px;
-        margin: 10px;
-        line-height: 1.6;
-    }
-
-    h2 {
-        font-size: 28px;
-        margin: 10px;
-        line-height: 1.6;
-    }
-    h4 {
-        font-size: 20px;
-        margin: 10px;
-        line-height: 1.6;
-    }
-
-    a.button {
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 6px;
-      color: white;
-      font-weight: bold;
-      background-color: black;
-      border: 1px solid #ccc;
-      border-radius: 40px;
-      padding: 10px 20px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      text-decoration: none; /* Remove underline */
-    }
-
-    a.button:hover {
-      background-color: darkgrey;
-    }
-
-    @media only screen and (max-width: 600px) {
-        h3 {
-            font-size: 13px;
-            height: auto;
-            padding: 10px;
+    <title>问卷实验</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h4 {
+            text-align: center;
+            margin-bottom: 20px;
         }
         p {
             font-size: 18px;
+            line-height: 1.6;
+            margin: 0 0 20px;
         }
-    }
-    .answer-input {
-      width: 60%;
-      margin-left: 10px;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-  </style>
-  </head>
-  <body>
-   <h4>请点击下面的播放图标，仔细观看动画。</h4>
-   <h4>注意：请不要拖动进度条，否则您将不能观看完整视频，这可能会错过一些重要细节。</h4>
-    <video width=100% height="400" controls>
-      <source src="https://nkucwh.github.io/cesi/%E6%95%B0%E5%AD%97%E5%9C%B0%E5%9B%BE.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-   </video>
-
-
-
-    <h1>参加数字展览时，使用数字地图功能查找展位对我来说很容易。</h1>  
-    
-    <div class="radio-group">  
-        <label><input type="radio" name="opinion" value="A"> A: 完全同意</label>  
-        <label><input type="radio" name="opinion" value="B"> B: 较同意</label>  
-        <label><input type="radio" name="opinion" value="C"> C: 一般</label>  
-        <label><input type="radio" name="opinion" value="D"> D: 较不同意</label>  
-        <label><input type="radio" name="opinion" value="E"> E: 完全不同意</label>  
-    </div>  
-
-</body> 
-
-<a class="button" onclick="submitData()" href="https://nkucwh.github.io/cesi/%E6%99%BA%E8%83%BD%E5%AF%BC%E8%88%AA.html" class="next-btn">提交并继续</a>   <!-- 提交按钮 -->
-
+        .video-container {
+            margin-bottom: 20px;
+        }
+        .video-container video {
+            width: 100%;
+            height: auto;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .radio-group label {
+            width: 48%;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 600px) {
+            .radio-group label {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4>请点击下面的播放图标，仔细观看动画。</h4>
+        <h4>注意：请不要拖动进度条，否则您将不能观看完整视频，这可能会错过一些重要细节。</h4>
+        <div class="video-container">
+            <video controls>
+                <source src="https://nkucwh.github.io/cesi/%E6%95%B0%E5%AD%97%E5%9C%B0%E5%9B%BE.mp4" type="video/mp4">
+                您的浏览器不支持视频标签。
+            </video>
+        </div>
+        <h1>参加数字展览时，使用数字地图功能查找展位对我来说很容易。</h1>
+        <div class="radio-group">
+            <label><input type="radio" name="opinion" value="A"> A: 完全同意</label>
+            <label><input type="radio" name="opinion" value="B"> B: 较同意</label>
+            <label><input type="radio" name="opinion" value="C"> C: 一般</label>
+            <label><input type="radio" name="opinion" value="D"> D: 较不同意</label>
+            <label><input type="radio" name="opinion" value="E"> E: 完全不同意</label>
+        </div>
+        <a class="button" onclick="submitData()" href="https://nkucwh.github.io/cesi/%E6%99%BA%E8%83%BD%E5%AF%BC%E8%88%AA.html" >提交并继续</a>
+    </div>
+</body>
 <script>
 function submitData() {
-  // 获取用户输入的答案
-  var answer = document.getElementById("answer").value;
-  
-  // 检查用户是否填写了答案
-  if (!answer) {
-    alert("请填写答案后再提交！");
-    return; // 如果未填写答案，则不执行后续操作
-  }
-  
-  // 创建一个新的XHR对象
-  var xhr = new XMLHttpRequest();
-  
-  // 配置XHR请求
-  xhr.open("POST", "http://customer_lct.nkubjw.cn/process_data.php", true);
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  
-  // 处理XHR响应
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-      if (xhr.status == 200) {
-        // 用户提交了数据后，可以继续执行其他操作或跳转到下一个页面
-        window.location.href = "http://customer_lct.nkubjw.cn/index_3.html";
-      } else {
-        // 处理错误情况
-        alert("发生错误，请稍后再试。");
-      }
+    var answer = document.querySelector('input[name="opinion"]:checked').value;
+    if (!answer) {
+        alert("请填写答案后再提交！");
+        return;
     }
-  };
-  
-  // 发送XHR请求
-  xhr.send("answer=" + encodeURIComponent(answer));
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://customer_lct.nkubjw.cn/process_data.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.status == 200) {
+                window.location.href = "http://customer_lct.nkubjw.cn/index_3.html";
+            } else {
+                alert"发生错误，请稍后再试。";
+            }
+        }
+    };
+    xhr.send("answer=" + encodeURIComponent(answer));
 }
 </script>
-
-</body>
 </html>
