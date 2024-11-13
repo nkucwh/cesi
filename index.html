@@ -1,65 +1,77 @@
-<!DOCTYPE html>  
-<html lang="zh">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>调查问卷</title>  
-    <style>  
-        body {  
-            font-family: Arial, sans-serif;  
-            background-color: #f8f9fa;  
-            margin: 0;  
-            padding: 20px;  
-        }  
-        .container {  
-            max-width: 600px;  
-            margin: auto;  
-            background: white;  
-            padding: 20px;  
-            border-radius: 10px;  
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);  
-        }  
-        h1, h2 {  
-            text-align: center;  
-        }  
-        .question {  
-            margin: 20px 0;  
-        }  
-        .options {  
-            display: flex;  
-            justify-content: space-between;  
-        }  
-        .next-btn {  
-            display: block;  
-            width: 100%;  
-            padding: 10px;  
-            background-color: #007bff;  
-            color: white;  
-            border: none;  
-            border-radius: 5px;  
-            cursor: pointer;  
-            text-align: center;  
-            text-decoration: none;  
-        }  
-        .next-btn:hover {  
-            background-color: #0056b3;  
-        }  
-    </style>  
-</head>  
-<body>  
-    <div class="container">  
-        <h1>实验</h1>  
-        <p>您好！非常感谢您的宝贵时间，此次问卷仅用于学术研究，不存在任何商业用途，更不会泄漏您的任何隐私问题。请您认真阅读以下材料，并跟随您的真实想法回答相关问题。感谢您的支持！</p>  
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问卷实验</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border: 2px solid #e0e7ff;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        .question {
+            margin: 20px 0;
+            border-bottom: 1px solid #e0e7ff;
+            padding-bottom: 10px;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        label {
+            font-size: 16px;
+        }
+        .next-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>实验</h1>
+        <p>您好！非常感谢您的宝贵时间，此次问卷仅用于学术研究，不存在任何商业用途，更不会泄漏您的任何隐私问题。请您认真阅读以下材料，并跟随您的真实想法回答相关问题。感谢您的支持！</p>
         
-        <div class="question">  
-            <h2>Q1 您的性别</h2>  
-            <div class="options">  
-                <label><input type="radio" name="mood1" value="男"> 男</label>  
-                <label><input type="radio" name="mood1" value="女"> 女</label>  
-            </div>  
-        </div>  
+        <div class="question">
+            <h2>Q1 您的性别</h2>
+            <div class="options">
+                <label><input type="radio" name="gender" value="male"> 男</label>
+                <label><input type="radio" name="gender" value="female"> 女</label>
+            </div>
+        </div>
+<div class="question">  
 
-        <div class="question">  
             <h2>Q2 您的年龄</h2>  
             <div class="options">  
                 <label><input type="radio" name="satisfaction1" value="18-25"> 18-25</label>  
@@ -97,7 +109,9 @@
             </div>  
         </div>  
 
-        <a href="https://nkucwh.github.io/cesi/%E6%8D%A2%E8%A3%85%E5%B1%95%E7%A4%BA.html" class="next-btn">下一页</a>  
-    </div>  
-</body>  
+        <!-- 其他问题类似结构 -->
+
+        <a href="https://nkucwh.github.io/cesi/%E6%8D%A2%E8%A3%85%E5%B1%95%E7%A4%BA.html" class="next-btn">下一页</a>
+    </div>
+</body>
 </html>
